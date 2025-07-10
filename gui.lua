@@ -1,75 +1,74 @@
--- GUI Principal
+-- Crear GUI
 local gui = Instance.new("ScreenGui", game.CoreGui)
-gui.Name = "g00bkiddGui"
+gui.Name = "AnimationPlayerR6"
 
 -- Marco principal
 local frame = Instance.new("Frame", gui)
-frame.Size = UDim2.new(0, 250, 0, 150)
-frame.Position = UDim2.new(0.5, -125, 0.5, -75)
+frame.Size = UDim2.new(0, 300, 0, 160)
+frame.Position = UDim2.new(0.5, -150, 0.5, -80)
 frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
-frame.BorderSizePixel = 0
 frame.Active = true
 frame.Draggable = true
 
-local uicorner = Instance.new("UICorner", frame)
-uicorner.CornerRadius = UDim.new(0, 12)
+-- Redondeo
+local corner = Instance.new("UICorner", frame)
+corner.CornerRadius = UDim.new(0, 10)
+
+-- Header oscuro
+local header = Instance.new("Frame", frame)
+header.Size = UDim2.new(1, 0, 0, 30)
+header.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+
+local headerCorner = Instance.new("UICorner", header)
+headerCorner.CornerRadius = UDim.new(0, 10)
 
 -- Título
-local title = Instance.new("TextLabel", frame)
-title.Size = UDim2.new(1, 0, 0, 30)
+local title = Instance.new("TextLabel", header)
+title.Size = UDim2.new(1, 0, 1, 0)
 title.BackgroundTransparency = 1
-title.Text = "g00bkidd gui"
+title.Text = "animation player r6"
 title.TextColor3 = Color3.fromRGB(255, 255, 255)
 title.Font = Enum.Font.GothamBold
-title.TextSize = 20
+title.TextSize = 16
 
--- Decal Spam Botón
-local decalBtn = Instance.new("TextButton", frame)
-decalBtn.Size = UDim2.new(0.9, 0, 0, 30)
-decalBtn.Position = UDim2.new(0.05, 0, 0, 40)
-decalBtn.Text = "Decal Spam"
-decalBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-decalBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-decalBtn.Font = Enum.Font.Gotham
-decalBtn.TextSize = 16
+-- Texto "Animation ID:"
+local label = Instance.new("TextLabel", frame)
+label.Size = UDim2.new(1, -40, 0, 20)
+label.Position = UDim2.new(0, 20, 0, 50)
+label.BackgroundTransparency = 1
+label.Text = "Animation ID:"
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.Font = Enum.Font.Gotham
+label.TextSize = 14
+label.TextXAlignment = Enum.TextXAlignment.Left
 
-local corner1 = Instance.new("UICorner", decalBtn)
-corner1.CornerRadius = UDim.new(0, 8)
+-- Cuadro para escribir la ID
+local textbox = Instance.new("TextBox", frame)
+textbox.Size = UDim2.new(1, -40, 0, 30)
+textbox.Position = UDim2.new(0, 20, 0, 75)
+textbox.PlaceholderText = "Enter Animation ID"
+textbox.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+textbox.TextColor3 = Color3.fromRGB(255, 255, 255)
+textbox.Font = Enum.Font.Gotham
+textbox.TextSize = 14
 
-decalBtn.MouseButton1Click:Connect(function()
-    for _, v in pairs(workspace:GetDescendants()) do
-        if v:IsA("Decal") then
-            v.Texture = "rbxassetid://15236736874"
-        end
-    end
+local tbCorner = Instance.new("UICorner", textbox)
+tbCorner.CornerRadius = UDim.new(0, 6)
+
+-- Botón cerrar
+local close = Instance.new("TextButton", header)
+close.Size = UDim2.new(0, 30, 0, 30)
+close.Position = UDim2.new(1, -30, 0, 0)
+close.Text = "X"
+close.BackgroundTransparency = 1
+close.TextColor3 = Color3.fromRGB(200, 0, 0)
+close.Font = Enum.Font.GothamBold
+close.TextSize = 16
+
+close.MouseButton1Click:Connect(function()
+    gui:Destroy()
 end)
 
--- Música Toggle
-local playing = false
-local sound = Instance.new("Sound", workspace)
-sound.SoundId = "rbxassetid://75522197868449"
-sound.Volume = 3
-sound.Looped = true
-
-local musicBtn = Instance.new("TextButton", frame)
-musicBtn.Size = UDim2.new(0.9, 0, 0, 30)
-musicBtn.Position = UDim2.new(0.05, 0, 0, 80)
-musicBtn.Text = "Play Music"
-musicBtn.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-musicBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
-musicBtn.Font = Enum.Font.Gotham
-musicBtn.TextSize = 16
-
-local corner2 = Instance.new("UICorner", musicBtn)
-corner2.CornerRadius = UDim.new(0, 8)
-
-musicBtn.MouseButton1Click:Connect(function()
-    if playing then
-        sound:Pause()
-        musicBtn.Text = "Play Music"
-    else
-        sound:Play()
-        musicBtn.Text = "Pause Music"
     end
     playing = not playing
 end)
